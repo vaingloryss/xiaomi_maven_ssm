@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vainglory.mapper.AddressMapper">
+
+    <select id="findByUid" resultType="Address">
+        <include refid="selectAddress"/>
+        where uid = #{uid}
+    </select>
+    <insert id="add" parameterType="Address">
+        <include refid="insertAddress"/>
+        values (null,#{detail},#{name},#{phone},#{uid},#{level})
+    </insert>
+    <delete id="delete">
+        delete from tb_address where id=#{aid}
+    </delete>
+    <update id="update" parameterType="Address">
+        update tb_address set name=#{name},phone=#{phone},detail=#{detail} where id = #{id}
+    </update>
+
+    <update id="setDefault">
+        update tb_address set level=0 where uid=#{uid} and level=1;
+        update tb_address set level=1 where id=#{aid}
+    </update>
+
+    <select id="findById" resultType="Address">
+        <include refid="selectAddress"/>
+        where id = #{aid}
+    </select>
+
+
+    <sql id="selectAddress">
+        select id,detail,name,phone,level from tb_address
+    </sql>
+
+    <sql id="insertAddress">
+        insert into tb_address(id,detail,name,phone,uid,level)
+    </sql>
+
+</mapper>

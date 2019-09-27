@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vainglory.mapper.CartMapper">
+
+    <select id="findByUid" resultType="com.vainglory.pojo.Cart">
+        <include refid="selectCart"/>
+        where id = #{uid}
+    </select>
+
+    <select id="findByUidAndGid" resultType="com.vainglory.pojo.Cart">
+        <include refid="selectCart"/>
+        where id = #{uid} and gid = #{goodsId}
+    </select>
+
+    <insert id="addCart" parameterType="com.vainglory.pojo.Cart">
+        <include refid="insertCart"/>
+        values (#{id},#{gid},#{num},#{money})
+    </insert>
+    <update id="updateCart" parameterType="com.vainglory.pojo.Cart">
+        update tb_cart set num = #{num},money = #{money} where id = #{id} and gid = #{gid}
+    </update>
+
+    <delete id="deleteByUidAndGid">
+        delete from tb_cart where id=#{uid} and gid=#{goodsId}
+    </delete>
+
+    <delete id="deleteByUid">
+        delete from tb_cart where id=#{uid}
+    </delete>
+
+    <sql id="insertCart">
+        insert into tb_cart(id,gid,num,money)
+    </sql>
+    <sql id="selectCart">
+        select id,gid,num,money from tb_cart
+    </sql>
+</mapper>

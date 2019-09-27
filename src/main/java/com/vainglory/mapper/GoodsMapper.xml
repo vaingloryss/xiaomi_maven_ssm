@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vainglory.mapper.GoodsMapper">
+
+    <select id="findByGoodsTypeId" resultType="com.vainglory.pojo.Goods">
+        <include refid="selectGoods"/>
+        where typeid = #{typeId}
+    </select>
+
+    <select id="findByGoodsId" resultType="goods">
+        <include refid="selectGoods"/>
+        where id = #{goodsId}
+    </select>
+
+    <sql id="selectGoods">
+        select id,name,pubdate,picture,price,star,intro from tb_goods
+    </sql>
+</mapper>

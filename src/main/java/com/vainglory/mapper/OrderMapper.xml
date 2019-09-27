@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vainglory.mapper.OrderMapper">
+
+    <select id="findByUid" resultType="Order">
+        <include refid="selectOrder"/>
+        where uid = #{uid}
+    </select>
+    <select id="findByOid" resultType="Order">
+        <include refid="selectOrder"/>
+        where id = #{oid}
+    </select>
+    <insert id="addOrder" parameterType="Order">
+        <include refid="insertOrder"/>
+        values(#{id},#{uid},#{money},#{status},#{time},#{aid})
+    </insert>
+
+    <sql id="selectOrder">
+        select id,uid,money,status,time,aid from tb_order
+    </sql>
+
+    <sql id="insertOrder">
+        insert into tb_order(id,uid,money,status,time,aid)
+    </sql>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vainglory.mapper.OrderDetailMapper">
+    <select id="findByOid" resultType="OrderDetail">
+        <include refid="selectOrderDetail"/>
+        where oid = #{oid}
+    </select>
+
+    <insert id="addOrderDetail" parameterType="OrderDetail">
+        <include refid="insertOrderDetail"/>
+        values (#{id},#{oid},#{pid},#{num},#{money})
+    </insert>
+
+    <sql id="selectOrderDetail">
+        select id,oid,pid,num,money from tb_orderdetail
+    </sql>
+
+    <sql id="insertOrderDetail">
+        insert into tb_orderdetail(id,oid,pid,num,money)
+    </sql>
+</mapper>

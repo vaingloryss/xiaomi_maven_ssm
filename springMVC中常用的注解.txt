@@ -1,0 +1,19 @@
+@Controller：在spring容器声明一个Controller层类的Bean
+@Service("") :在spring容器声明一个Service层类的Bean
+@Repository：在spring容器声明一个Dao层类的Bean
+@Component：通用注解，类似@Service和@Repository，没有明确语义，在使用AspectJ注解实现aop时，该注解用在切面上
+
+@Scope("prototype"): 声明Bean的声明周期
+
+@Autowired : 根据类型自动注入，此时，Bean不需要有getter,setter方法。
+@Resource ：根据名称自动注入，不常用
+@Transactional(很多属性) ：事务，当前类的所有方法都切入事务
+
+@Transactional(propagation=Propagation.SUPPORTS)，指定某方法不切入事务
+
+@RequestMapping
+@GetMapping
+@PostMapping
+@ResponseBody
+
+@Service

@@ -1,0 +1,88 @@
+Spring MVC放行静态资源
+
+1、全部放行
+<mvc:default-servlet-handler/>
+注意mvc命名空间不要引错
+
+2、分别放行
+
+<mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+<mvc:resources location="/WEB-INF/image/" mapping="/image/**"/>
+<mvc:resources location="/WEB-INF/goodsImg/" mapping="/goodsImg/**"/>
+<mvc:resources location="/WEB-INF/fonts/" mapping="/fonts/**"/>
+
+location表示静态文件的位置，mapping表示location对应的该位置的所有请求映射。
+
+1和2放行静态资源时，均需要配置在springmvcConfig.xml文件中
+并且配置前需要先配置注解驱动
+<!--加载注解驱动-->
+<mvc:annotation-driven/>
+
+不要向前端返回Integer类型的数据，应使用String类型
+
+解决@ResponseBody中文乱码问题
+
+方法一：（）
+为每个@Response注解标注的RequestMapping注解中添加属性 produces = "application/json;charset=utf-8"
+
+方法二：（推荐）
+ <mvc:annotation-driven>
+    <!--消息转换器,解决responseBody返回中外乱码问题，替代RequestMapping的produces属性-->
+    <!--配置一个媒体类型-->
+    <!--
+    <mvc:message-converters register-defaults="true">
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+            <property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+        </bean>
+    </mvc:message-converters>
+    -->
+    <!--配置多个媒体类型-->
+    <!--<mvc:message-converters register-defaults="true">
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter" >
+            <property name = "supportedMediaTypes">
+                <list>
+                    <value>application/json;charset=utf-8</value>
+                    <value>text/html;charset=utf-8</value>
+                    <value>application/x-www-form-urlencoded</value>
+                </list>
+            </property>
+        </bean>
+    </mvc:message-converters>-->
+ </mvc:annotation-driven>
+
+
+25-Sep-2019 21:32:47.318 警告 [http-nio-8080-exec-7] org.springframework.web.servlet.PageNotFound.noHandlerFound No mapping found for HTTP request with URI [/xiaomi_maven_ssm/css/bootstrap.min.css] in DispatcherServlet with name 'springmvc'
+25-Sep-2019 21:32:47.324 警告 [http-nio-8080-exec-10] org.springframework.web.servlet.PageNotFound.noHandlerFound No mapping found for HTTP request with URI [/xiaomi_maven_ssm/image/yyymix.gif] in DispatcherServlet with name 'springmvc'
+25-Sep-2019 21:32:47.325 警告 [http-nio-8080-exec-6] org.springframework.web.servlet.PageNotFound.noHandlerFound No mapping found for HTTP request with URI [/xiaomi_maven_ssm/js/jquery.min.js] in DispatcherServlet with name 'springmvc'
+
+
+allowMultiQueries=true:
+数据库配置URL添加allowMultiQueries=true，开启对Mybatis多sql语句执行的执行支持
+
+<!--自动登录过滤器-->
+<filter>
+    <filter-name>autoLogin</filter-name>
+    <filter-class>com.vainglory.filter.AutoLoginFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>autoLogin</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+配置后UserMapper一直为空
+
+
+
+HTTP 400 错误 - 请求无效 (Bad request)
+在ajax请求后台数据时有时会报 HTTP 400 错误 - 请求无效 (Bad request);出现这个请求无效报错说明请求没有进入到后台服务里；
+原因：1）前端提交数据的字段名称或者是字段类型和后台的实体类不一致，导致无法封装；
+      2）前端提交的到后台的数据应该是json字符串类型，而前端没有将对象转化为字符串类型；
+解决方案：
+1）对照字段名称，类型保证一致性
+2）使用stringify将前端传递的对象转化为字符串    data: JSON.stringify(param)  ;
+
+
+
+
+Model类：
+ModelAndView类：
