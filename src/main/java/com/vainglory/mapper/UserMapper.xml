@@ -14,6 +14,11 @@
         values (null,#{username},#{password},#{email},#{gender},#{flag},#{role},#{code})
     </insert>
 
+    <select id="findByFlag" resultType="user">
+        <include refid="selectUser"/>
+        where flag = #{flag}
+    </select>
+
     <sql id="selectUser">
         select id,username,password,email,gender,flag,role,code from tb_user
     </sql>

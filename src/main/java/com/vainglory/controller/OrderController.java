@@ -1,12 +1,12 @@
 package com.vainglory.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import com.alibaba.fastjson.JSON;
 import com.vainglory.pojo.*;
 import com.vainglory.service.IAddressService;
 import com.vainglory.service.ICartService;
 import com.vainglory.service.IOrderService;
 import com.vainglory.util.RandomUtils;
+import com.vainglory.util.WeiXinResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,7 +63,6 @@ public class OrderController {
         return "order";
     }
 
-    //orderController/orderServlet?op=addOrder&aid=11
     @RequestMapping(value = "addOrder",method = RequestMethod.GET)
     public String addOrder(Integer aid,HttpServletRequest request,Model model){
         User user = (User) request.getSession().getAttribute("user");
@@ -87,6 +85,37 @@ public class OrderController {
         orderService.addOrder(order);
         model.addAttribute("order",order);
         return "orderSuccess";
+    }
+    @RequestMapping(value = "toPayWeiXin",method = RequestMethod.GET)
+    public String toPayWeiXin(String oid,Model model){
+        Order order = orderService.payOrder(oid);
+        String goodsName = "";
+        for (OrderDetail orderDetail : order.getOrderDetails()) {
+            goodsName += orderDetail.getGoods().getName()+" ";
+        }
+        model.addAttribute("orderId",oid);
+        model.addAttribute("money",order.getMoney());
+        model.addAttribute("goodsName",goodsName);
+        return "payWeixin";
+    }
 
+    @RequestMapping(value = "wxSuccess",method = RequestMethod.GET)
+    public String wxSuccess(String result,Model model){
+        System.out.println("wxSuccess日志：");
+        String payMSG = "";
+        WeiXinResult weiXinResult = JSON.parseObject(result, WeiXinResult.class);
+        String result_code = weiXinResult.getResult().getResult_code();
+        if ("SUCCESS".equals(result_code)){
+            if (weiXinResult.getType()==0){
+                payMSG = "您的订单号为:"+weiXinResult.getResult().getOut_trade_no()+",金额为:"+weiXinResult.getResult().getCash_fee()+"已经支付成功,等待发货~~";
+                model.addAttribute("msg",payMSG);
+                return "message";
+            }
+            orderService.updateOrderStatus(weiXinResult.getResult().getOut_trade_no(),"2");
+        }else {
+            payMSG = "您的订单号为:"+weiXinResult.getResult().getOut_trade_no()+"支付失败";
+            model.addAttribute("msg",payMSG);
+        }
+        return "message";
     }
 }

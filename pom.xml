@@ -113,6 +113,12 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.59</version>
     </dependency>
+    <!--Jackson-->
+    <!--<dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.5.4</version>
+    </dependency>-->
     <!--mysql-->
     <dependency>
       <groupId>mysql</groupId>
@@ -131,12 +137,32 @@
         <artifactId>pagehelper</artifactId>
         <version>5.1.10</version>
     </dependency>
+    <!--ValidateCode-->
     <dependency>
       <groupId>com.validate</groupId>
       <artifactId>validatecode</artifactId>
       <version>1.0.0</version>
     </dependency>
+    <!--文件上传-->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.4</version>
+      <!--排除servlet-api-->
+      <exclusions>
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
 
+    <!--单元测试-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

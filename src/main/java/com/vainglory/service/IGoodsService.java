@@ -15,4 +15,8 @@ public interface IGoodsService {
     Goods goodsDetail(Integer goodsId);
 
     Goods findById(Integer goodsId);
+
+    List<Goods> findAll();
+
+    void addGoods(Goods goods);
 }

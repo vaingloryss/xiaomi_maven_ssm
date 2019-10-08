@@ -10,9 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>小米网后台主页-会员信息页面</title>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		loadUser();
@@ -20,10 +20,9 @@
 	//连接servlet 获取 数据
 	function loadUser(){
 		$.ajax({
-			url:"${pageContext.request.contextPath}/userManage?op=showAllUser",
+			url:"${pageContext.request.contextPath}/adminController/getUserList?flag=1",
 			method:"get",
 			success:function(data){
-				//alert(data);
 				showMsg(data);
 			},
 			dataType:"json",
@@ -36,7 +35,6 @@
 	//显示用户信息
 	function showMsg(data){
 		//data，已经经ajax自动解析
-
 		$("#tb_list").html("<tr class='tr_head'><td>编号</td><td>邮箱</td><td>姓名</td><td>性别</td><td>类别</td><td>操作</td></tr>");
 		var i = 1;
 		for(var u in data){
@@ -138,12 +136,9 @@
 								<button type="button" class="btn btn-primary" id="search"><span class="glyphicon glyphicon-search"></span></button>
 							</div>
 						</div>
-				<!-- 列表显示 -->
+						<!-- 列表显示 -->
 						<table id="tb_list" class="table table-striped table-hover table-bordered">
-							
 						</table>
-
-						
 					</div>
 				</div>
 			</div>

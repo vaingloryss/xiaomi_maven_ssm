@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements IUserService {
@@ -32,5 +34,10 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(MD5Util.encode(user.getPassword()));
         userMapper.add(user);
         EmailUtils.sendEmail(user);
+    }
+
+    @Override
+    public List<User> getUserList(Integer flag) {
+        return userMapper.findByFlag(flag);
     }
 }

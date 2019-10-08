@@ -1,11 +1,16 @@
 package com.vainglory.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class Goods {
     private Integer id;
     private String name;
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
     private Date pubdate;
     private String picture;
     private BigDecimal price;

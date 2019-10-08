@@ -29,7 +29,7 @@ public class GoodsController {
         if (pageNum==null){
             pageNum=1;
         }
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,8);
         List<Goods> goods = goodsService.miGaming(typeId,pageNum);
         PageInfo pageInfo = new PageInfo(goods);
         model.addAttribute("typeId",typeId);

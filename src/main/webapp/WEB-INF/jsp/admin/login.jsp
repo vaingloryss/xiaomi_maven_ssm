@@ -8,9 +8,9 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 	    <!-- Bootstrap -->
-	    <link href="../css/bootstrap.min.css" rel="stylesheet">
-	    <script src="../js/jquery.min.js"></script>
-	    <script src="../js/bootstrap.min.js"></script>
+	    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+	    <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 		<title>登录</title>
 	<script type="text/javascript">
 		$(function(){
@@ -46,9 +46,9 @@
 	</div>
 	<div class="panel-body">
 		<div style="text-align: center;">
-			<img src="../image/mistore_logo.png" alt="logo" width="30%" height="30%" />
+			<img src="${pageContext.request.contextPath}/image/mistore_logo.png" alt="logo" width="30%" height="30%" />
 		</div>
-		<form action="${pageContext.request.contextPath }/adminLogin?op=adminLogin" method="post">
+		<form action="${pageContext.request.contextPath }/adminController/adminLogin" method="post">
 			<div class="form-group">
 				<label>用户名:</label>
 				<input type="text" name="username" id="" class="form-control" placeholder="请输入用户名"/>
@@ -67,6 +67,7 @@
 				<input type="reset" value="重置" class="btn btn-default">
 			</div>
 		</form>
+		<p style="color: red">${loginMSG}</p>
 	</div>
 </div>
 </body>

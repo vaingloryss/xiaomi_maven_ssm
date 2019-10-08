@@ -1,5 +1,8 @@
 package com.vainglory.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +13,10 @@ public class Order {
     private Integer uid;
     private BigDecimal money;
     private String status;
+    //jackson
+    /*@JsonFormat(pattern = "yyyy/MM/dd HH:MM:ss")*/
+    //FastJson
+    @JSONField(format = "yyyy/MM/dd HH:MM:ss")
     private Date time;
     private Integer aid;
 

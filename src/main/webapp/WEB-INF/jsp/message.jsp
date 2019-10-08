@@ -28,7 +28,7 @@
 					
 					<p class="text-info" style="font-size: 20px;">${msg }</p>
 					
-					<a class="btn btn-default" href="${pageContext.request.contextPath }/WEB-INF/jsp/home.jsp" target="_blank">返回主页</a>
+					<a class="btn btn-default" href="${pageContext.request.contextPath }/userController/toHome" target="_blank">返回主页</a>
 					
 			</div>
 		</div>

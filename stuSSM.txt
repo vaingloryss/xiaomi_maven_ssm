@@ -81,8 +81,15 @@ HTTP 400 错误 - 请求无效 (Bad request)
 1）对照字段名称，类型保证一致性
 2）使用stringify将前端传递的对象转化为字符串    data: JSON.stringify(param)  ;
 
-
+配置消息转化器
+<value>APPLICATION_JSON_UTF8</value>
+org.springframework.util.InvalidMimeTypeException: Invalid mime type "APPLICATION_JSON_UTF8": does not contain '/'
 
 
 Model类：
 ModelAndView类：
+
+mime-type + encoding = content-type
+
+消息 Request method 'GET' not supported
+描述 请求行中接收的方法由源服务器知道，但目标资源不支持消息

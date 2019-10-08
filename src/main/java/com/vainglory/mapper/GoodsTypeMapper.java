@@ -1,6 +1,7 @@
 package com.vainglory.mapper;
 
 import com.vainglory.pojo.GoodsType;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,4 +11,8 @@ import java.util.List;
  */
 public interface GoodsTypeMapper {
     List<GoodsType> findByLevel();
+    GoodsType findById(@Param("id")Integer id);
+
+    List<GoodsType> findAll();
+
 }

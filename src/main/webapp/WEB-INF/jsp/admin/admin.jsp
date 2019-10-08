@@ -10,9 +10,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <title>后台主页面</title>
 <style rel="stylesheet">
 @media ( min-width :768px ) {
@@ -37,7 +37,7 @@
 </head>
 <body>
 	<c:if test="${admin==null }">
-		<c:redirect url="login.jsp"></c:redirect>
+		<c:redirect url="${pageContext.request.contextPath}/adminController/toLogin"></c:redirect>
 	</c:if>
 	<!--导航 -->
 	<div style="width: 80%;margin-left: 10%;">
@@ -129,22 +129,22 @@
 		<div class="page_main">
 			<script type="text/javascript">
 				$("#showUser").click(function(){
-					$(".dv_content").attr("src","userList.jsp");
+					$(".dv_content").attr("src","${pageContext.request.contextPath}/adminController/toUserList");
 				})
 				$("#invalid").click(function(){
-					$(".dv_content").attr("src","invalidUser.jsp");
+					$(".dv_content").attr("src","${pageContext.request.contextPath}/adminController/toInvalidUser");
 				})
 				$("#showGoodsType").click(function(){
-					$(".dv_content").attr("src","${pageContext.request.contextPath}/goodsManage?op=showAllGoodsType");
+					$(".dv_content").attr("src","${pageContext.request.contextPath}/adminController/getGoodsTypeList");
 				})
 				$("#addGoodsType").click(function(){
-					$(".dv_content").attr("src","${pageContext.request.contextPath}/getGoodsType?flag=add");
+					$(".dv_content").attr("src","${pageContext.request.contextPath}/adminController/toAddGoodsType");
 				})
 				$("#showGoods").click(function(){
-					$(".dv_content").attr("src","${pageContext.request.contextPath}/getGoodsList");
+					$(".dv_content").attr("src","${pageContext.request.contextPath}/adminController/getGoodsList");
 				})
 				$("#addGoods").click(function(){
-					$(".dv_content").attr("src","addGoods.jsp");
+					$(".dv_content").attr("src","${pageContext.request.contextPath}/adminController/toAddGoods");
 				})
 				$("#showOrder").click(function(){
 					$(".dv_content").attr("src","${pageContext.request.contextPath}/getAllOrder");

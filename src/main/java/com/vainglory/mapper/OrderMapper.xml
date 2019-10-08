@@ -17,6 +17,10 @@
         values(#{id},#{uid},#{money},#{status},#{time},#{aid})
     </insert>
 
+    <update id="updateOrderStatus">
+        update tb_order set status=#{status} where id = #{oid}
+    </update>
+
     <sql id="selectOrder">
         select id,uid,money,status,time,aid from tb_order
     </sql>

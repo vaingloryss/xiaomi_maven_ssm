@@ -13,8 +13,18 @@
         <include refid="selectGoods"/>
         where id = #{goodsId}
     </select>
+    <select id="findAll" resultType="goods">
+        <include refid="selectGoods"/>
+    </select>
+    <insert id="add" parameterType="goods">
+        <include refid="insertGoods"/>
+        values (#{name},#{pubdate},#{picture},#{price},#{star},#{intro},#{typeid})
+    </insert>
 
     <sql id="selectGoods">
-        select id,name,pubdate,picture,price,star,intro from tb_goods
+        select id,name,pubdate,picture,price,star,intro,typeid from tb_goods
+    </sql>
+    <sql id="insertGoods">
+        insert into tb_goods(name,pubdate,picture,price,star,intro,typeid)
     </sql>
 </mapper>

@@ -2,6 +2,7 @@ package com.vainglory.service.serviceImpl;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.vainglory.mapper.*;
+import com.vainglory.pojo.Address;
 import com.vainglory.pojo.Order;
 import com.vainglory.pojo.OrderDetail;
 import com.vainglory.service.IOrderService;
@@ -63,5 +64,23 @@ public class OrderServiceImpl implements IOrderService {
         }
         //清空购物车
         cartMapper.deleteByUid(order.getUid());
+    }
+
+    @Override
+    public Order payOrder(String oid) {
+        Order order = orderMapper.findByOid(oid);
+        Address address = addressMapper.findById(order.getAid());
+        List<OrderDetail> details = orderDetailMapper.findByOid(oid);
+        for (OrderDetail detail : details) {
+            detail.setGoods(goodsMapper.findByGoodsId(detail.getPid()));
+        }
+        order.setAddress(address);
+        order.setOrderDetails(details);
+        return order;
+    }
+
+    @Override
+    public void updateOrderStatus(String oid, String status) {
+        orderMapper.updateOrderStatus(oid,status);
     }
 }

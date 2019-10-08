@@ -4,12 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.vainglory.mapper.GoodsTypeMapper">
 
-    <select id="findByLevel" resultType="com.vainglory.pojo.GoodsType">
-        <include refid="selectUser"/>
+    <select id="findByLevel" resultType="goodsType">
+        <include refid="selectGoodsType"/>
         where level=1 limit 0,4
     </select>
 
-    <sql id="selectUser">
+    <select id="findById" resultType="goodsType">
+        <include refid="selectGoodsType"/>
+        where id = #{id}
+    </select>
+
+    <select id="findAll" resultType="goodsType">
+        <include refid="selectGoodsType"/>
+    </select>
+
+    <sql id="selectGoodsType">
         select id,name,level,parent from tb_goods_type
     </sql>
 </mapper>

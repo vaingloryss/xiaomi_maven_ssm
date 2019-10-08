@@ -14,8 +14,8 @@
 	function pay(orderId,money){
 		location.href="pay.jsp?oid="+orderId+"&money="+money;
 	}
-	function payWeiXin(orderId,money){
-		location.href="payServlet?op=toPayWeiXin&orderId="+orderId;
+	function payWeiXin(orderId){
+		location.href="${pageContext.request.contextPath}/orderController/toPayWeiXin?oid="+orderId;
 	}
 
 </script>
@@ -85,7 +85,7 @@
 				<c:if test="${order.status eq 1 }">
 					<button type="button" onclick="pay('${order.id}','${order.money}')" class="btn btn-warning btn-sm">易付宝支付</button>
 						&nbsp;&nbsp;
-					<button type="button" onclick="payWeiXin('${order.id}','${order.money}')" class="btn btn-success btn-sm">微信支付</button>
+					<button type="button" onclick="payWeiXin('${order.id}')" class="btn btn-success btn-sm">微信支付</button>
 				</c:if>
 			</td>
 		</tr>

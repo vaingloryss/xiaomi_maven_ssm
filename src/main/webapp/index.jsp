@@ -4,7 +4,9 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:forward page="/userController/toHome"/>
-<%--<a href="${pageContext.request.contextPath}/userController/toHome">去首页</a>--%>
+<%--<jsp:forward page="${pageContext.request.contextPath}/userController/toHome"/>--%>
+<%--<jsp:forward page="/adminController/adminLogin"/>--%>
+<a href="${pageContext.request.contextPath}/userController/toHome">用户首页</a><br>
+<a href="${pageContext.request.contextPath}/adminController/toLogin">管理员登录</a>
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.vainglory.service.serviceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.vainglory.mapper.GoodsMapper;
+import com.vainglory.mapper.GoodsTypeMapper;
 import com.vainglory.pojo.Goods;
 import com.vainglory.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class GoodsServiceImpl implements IGoodsService {
 
     @Autowired
     GoodsMapper goodsMapper;
+    @Autowired
+    GoodsTypeMapper goodsTypeMapper;
 
     private static final Integer PAGESIZE=8;
 
@@ -40,5 +43,19 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     public Goods findById(Integer goodsId) {
         return goodsMapper.findByGoodsId(goodsId);
+    }
+
+    @Override
+    public List<Goods> findAll() {
+        List<Goods> goodsList = goodsMapper.findAll();
+        for (Goods goods : goodsList) {
+            goods.setGoodsType(goodsTypeMapper.findById(goods.getTypeid()));
+        }
+        return goodsList;
+    }
+
+    @Override
+    public void addGoods(Goods goods) {
+        goodsMapper.add(goods);
     }
 }

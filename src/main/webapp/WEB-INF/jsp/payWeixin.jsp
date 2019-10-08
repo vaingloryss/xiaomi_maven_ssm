@@ -21,13 +21,13 @@
 				<div class="panel panel-default"  style="margin: 0 auto;width: 95%;">
 				  <div class="panel-heading">
 				    <h3 class="panel-title"><span class="glyphicon glyphicon-yen"></span>&nbsp;&nbsp;在线支付
-				    	<span class="pull-right"><a href="${pageContext.request.contextPath }/getOrderList">返回订单列表</a>
+				    	<span class="pull-right"><a href="${pageContext.request.contextPath }/orderController/showOrder">返回订单列表</a>
 				    	</span>
 				    </h3>
 				  </div>
 				  <div class="panel-body">	 
 				  	<form  action="http://ceshi.chenjunbo.xin/payment/weixinpay" method="get">
-					<table class="table table-bordered table-striped table-hover">
+					<table class="table table-bordered table-striped table-hover">g
 						<tr>
 							<td colspan="1">订单号:</td>
 							<td colspan="3"><input type="text" class="form-control" name="orderId" value="${orderId}" readonly="readonly"></td>
@@ -45,7 +45,7 @@
 							<td colspan="1">商品介绍:</td>
 							<td colspan="3"><input type="text" class="form-control" name="body" value="${goodsName}" readonly="readonly">
 							<!-- 设置 程序回传到的链接地址 -->
-							<input type="hidden" class="form-control" name="url" value="http://localhost:8080/xiaomishop_vainglory/wxSuccessServlet">
+							<input type="hidden" class="form-control" name="url" value="http://localhost:8080/xiaomi_maven_ssm//orderController/wxSuccess">
 							</td>
 						</tr>
 						

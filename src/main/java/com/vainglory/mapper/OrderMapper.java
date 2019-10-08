@@ -15,4 +15,5 @@ public interface OrderMapper {
 
     void addOrder(Order order);
 
+    void updateOrderStatus(@Param("oid") String oid, @Param("status") String status);
 }

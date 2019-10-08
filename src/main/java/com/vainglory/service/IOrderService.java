@@ -15,4 +15,8 @@ public interface IOrderService {
     Order orderDetail(String oid);
 
     void addOrder(Order order);
+
+    Order payOrder(String oid);
+
+    void updateOrderStatus(String oid, String status);
 }

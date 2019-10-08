@@ -13,4 +13,7 @@ import java.util.List;
 public interface GoodsMapper {
     List<Goods> findByGoodsTypeId(Integer typeId);
     Goods findByGoodsId(@Param("goodsId") Integer goodsId);
+    List<Goods> findAll();
+
+    void add(Goods goods);
 }
